@@ -1,0 +1,114 @@
+{"identifier": "com_fezo_facebook", "version": "0.9", "includes": ["http://www.fezo.com/modules/facebook.html"], "definitions":
+    {
+        "toolboxes": {
+            "com_fezo_toolbox_facebook": {
+                "identifier": "com_fezo_toolbox_facebook",
+                "name": "Facebook",
+                "image": "/images/toolbox/icon-facebook.png"
+            }
+        },
+        "nodes": {
+            "com_fezo_types_controller.facebook_authenticate": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_facebook",
+                "description": "A successful authentication flow results in your application obtaining a user access token which can be used to make requests to Facebook's APIs.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.facebook_authenticate",
+                    "name": "Facebook.authenticate",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "appId",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "testAppId",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "permissions",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, appId, testAppId, permissions, onSuccess, onFail){facebookLogin(appId, testAppId, permissions, fezo.projectName, function(accessToken){model.fireEvent(undefined, true, 0, onSuccess, null, [accessToken])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])})})(this, %s, %s, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.facebook_graph": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_facebook",
+                "description": "The Graph API presents a simple, consistent view of the Facebook social graph.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.facebook_graph",
+                    "name": "Facebook.graphAPI",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "accessToken",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "arguments",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "method",
+                            "type": "string",
+                            "default": "GET"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, accessToken, path, arguments, method, onSuccess, onFail){facebookGraphAPI(accessToken, path, arguments, method, function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])})})(this, %s, %s, %s, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            }
+        }
+    }
+}

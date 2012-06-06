@@ -1,0 +1,590 @@
+{"identifier": "com_fezo_cordova", "version": "0.9", "includes": ["http://www.fezo.com/modules/cordova.html"], "definitions":
+    {
+        "toolboxes": {
+            "com_fezo_toolbox_cordova": {
+                "identifier": "com_fezo_toolbox_cordova",
+                "name": "Cordova",
+                "image": "/images/toolbox/icon-cordova.png"
+            }
+        },
+        "nodes": {
+            "com_fezo_types_controller.cordova_device": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "The device object describes the device's hardware and software.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_device",
+                    "name": "Cordova.device",
+                    "type": "active_producer",
+                    "inputs": [],
+                    "outputs": [{
+                        "name": "device.name",
+                        "type": "string",
+                        "template": "window.device.name",
+                        "port": 0,
+                        "connections": []
+                    },
+                    {
+                        "name": "device.cordova",
+                        "type": "string",
+                        "template": "window.device.cordova",
+                        "port": 0,
+                        "connections": []
+                    },
+                    {
+                        "name": "device.platform",
+                        "type": "string",
+                        "template": "window.device.platform",
+                        "port": 0,
+                        "connections": []
+                    },
+                    {
+                        "name": "device.uuid",
+                        "type": "string",
+                        "template": "window.device.uuid",
+                        "port": 0,
+                        "connections": []
+                    },
+                    {
+                        "name": "device.version",
+                        "type": "string",
+                        "template": "window.device.version",
+                        "port": 0,
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_events": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Cordova lifecycle events.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_events",
+                    "name": "Cordova.events",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "pause",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "resume",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "online",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "offline",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, pause, resume, resign, active, online, offline){if(window.device){ if(pause){document.addEventListener(\"pause\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});} if(resume){document.addEventListener(\"resume\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});} if(resign){document.addEventListener(\"resign\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});} if(active){document.addEventListener(\"active\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});} if(online){document.addEventListener(\"online\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});} if(offline){document.addEventListener(\"offline\", function() {model.fireEvent(undefined, true, 0, pause, null, []);});}}})(this, %s, %s, %s, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_getPicture": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Takes a photo using the camera or retrieves a photo from the device's album.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_getPicture",
+                    "name": "Cordova.getPicture",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "cameraOptions",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, options, onSuccess, onFail){if(window.device){navigator.camera.getPicture(function(imageData){model.fireEvent(undefined, true, 0, onSuccess, null, [imageData])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])}, cordovaOptions(options))}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_captureAudio": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Start the audio recorder application and return information about captured audio clip file(s).",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_captureAudio",
+                    "name": "Cordova.captureAudio",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "options",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, options, onSuccess, onFail){if(window.device){navigator.device.capture.captureAudio(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])}, cordovaOptions(options))}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_captureVideo": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Start the video recorder application and return information about captured video clip file(s).",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_captureVideo",
+                    "name": "Cordova.captureVideo",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "options",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, options, onSuccess, onFail){if(window.device){navigator.device.capture.captureVideo(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])}, cordovaOptions(options))}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_captureImage": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Start the camera application and return information about captured image file(s).",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_captureImage",
+                    "name": "Cordova.captureImage",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "options",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, options, onSuccess, onFail){if(window.device){navigator.device.capture.captureImage(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err])}, cordovaOptions(options))}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_fileReaderReadAsDataURL": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Read file and return data as a base64 encoded data url.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_fileReaderReadAsDataURL",
+                    "name": "Cordova.readAsDataURL",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "path",
+                            "type": "string",
+                            "default": ""
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, filePath, onSuccess, onFail){if(window.device){window.resolveLocalFileSystemURI(filePath, function(entry){entry.file(function(file){var reader = new FileReader(); reader.onloadend = function(evt){model.fireEvent(undefined, true, 0, onSuccess, null, [evt.target.result])}; reader.onerror = function(evt) {model.fireEvent(undefined, true, 0, onFail, null, ['readAsDataURL error while attempting readAsDataURL code: ' + evt.target.error.code])}; reader.readAsDataURL(file);}, function(evt){model.fireEvent(undefined, true, 0, onFail, null, ['readAsDataURL error while attempting readAsDataURL code: ' + evt.target.error.code]);});}, function(err){model.fireEvent(undefined, true, 0, onFail, null, ['readAsDataURL error while attempting resolveLocalFileSystemURI code: ' + err.code])});}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_getFormatData": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Retrieve the format information for a media file.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_getFormatData",
+                    "name": "Cordova.getFormatData",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "mediaFile",
+                            "type": "var",
+                            "default": "null"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, mediaFileData, onSuccess, onFail){if(window.device){var mediaFile = new MediaFile(mediaFileData.name, mediaFileData.fullPath, mediaFileData.type, mediaFileData.lastModifiedDate, mediaFileData.size); mediaFile.getFormatData(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(result){model.fireEvent(undefined, true, 0, onFail, null, [result])});}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_getCurrentHeading": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Get the current compass heading.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_getCurrentHeading",
+                    "name": "Cordova.getCurrentHeading",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, onSuccess, onFail){if(window.device){navigator.compass.getCurrentHeading(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(result){model.fireEvent(undefined, true, 0, onFail, null, [result])});}})(this, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_getCurrentAcceleration": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Captures device motion in the x, y, and z direction.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_getCurrentAcceleration",
+                    "name": "Cordova.getCurrentAcceleration",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, onSuccess, onFail){if(window.device){navigator.accelerometer.getCurrentAcceleration(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(result){model.fireEvent(undefined, true, 0, onFail, null, [result])});}})(this, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_getCurrentPosition": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Returns the device's current position as a Position object.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_getCurrentPosition",
+                    "name": "Cordova.getCurrentPosition",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, onSuccess, onFail){if(window.device){navigator.geolocation.getCurrentPosition(function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [result])}, function(result){model.fireEvent(undefined, true, 0, onFail, null, [result])});}})(this, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_contactsCreate": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "A synchronous function that returns a new Contact object.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_contactsCreate",
+                    "name": "Cordova.contactsCreate",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "properties",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, properties, onSuccess, onFail){if(window.device){var contact = navigator.contacts.create(properties); if(contact){function(result){model.fireEvent(undefined, true, 0, onSuccess, null, [contact])};} else {function(result){model.fireEvent(undefined, true, 0, onFail, null, [\"Unable to create contact, reason: unknown.\"])};}}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_contactsFind": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Queries the device contacts database and returns one or more Contact objects, each containing the fields specified.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_contactsFind",
+                    "name": "Cordova.contactsFind",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "contactFields",
+                            "type": "collection",
+                            "default": "[]"
+                        },
+                        {
+                            "name": "contactFindOptions",
+                            "type": "collection",
+                            "default": "{}"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, contactFields, contactFindOptions, onSuccess, onFail){if(window.device){navigator.contacts.find(contactFields, function(contacts){model.fireEvent(undefined, true, 0, onSuccess, null, [contacts]);}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err]);}, contactFindOptions);}})(this, %s, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_contactSave": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Saves a new contact to the device contacts database, or updates an existing contact if a contact with the same id already exists.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_contactSave",
+                    "name": "Cordova.contactSave",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "contact",
+                            "type": "var",
+                            "default": "null"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, contact, onSuccess, onFail){if(window.device){contact.save = Contact.prototype.save; contact.save(function(contact){model.fireEvent(undefined, true, 0, onSuccess, null, [contact]);}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [err]);});}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            },
+            "com_fezo_types_controller.cordova_contactRemove": {
+                "category": "com_fezo_types_controller",
+                "toolbox": "com_fezo_toolbox_cordova",
+                "description": "Removes the contact from the device contacts database. An error callback is called with a ContactError object if the removal is unsuccessful.",
+                "meta": {
+                    "identifier": "com_fezo_types_controller.cordova_contactRemove",
+                    "name": "Cordova.contactRemove",
+                    "type": "consumer",
+                    "nonActive": true,
+                    "inputs": [
+                        {
+                            "name": "contact",
+                            "type": "var",
+                            "default": "null"
+                        },
+                        {
+                            "name": "onSuccess",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        },
+                        {
+                            "name": "onFail",
+                            "type": "controller",
+                            "default": "null",
+                            "controller": true,
+                            "ignoreParams": true
+                        }
+                    ],
+                    "outputs": [{
+                        "name": "dummyOut",
+                        "type": "string",
+                        "template": "(function(model, contact, onSuccess, onFail){if(window.device){contact = new Contact(contact.id); contact.remove(function(contacts){model.fireEvent(undefined, true, 0, onSuccess, null, [contacts]);}, function(err){model.fireEvent(undefined, true, 0, onFail, null, [\"Remove failed with error code: \" + err.code])});}})(this, %s, %s, %s)",
+                        "connections": []
+                    }]
+                }
+            }
+        }
+    }
+}
